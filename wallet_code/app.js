@@ -2,10 +2,13 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 
-const db_connection = require('./db/connect')
+const db_connection = require("./db/connect");
+db_connection(process.env.MONGO_URI);
 const register_user = require("./routes/reg_user.route.js");
 
-db_connection(process.env.MONGO_URI)
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 app.get("/api/v1/home", (req, res) => {
   res.send("welcome");
