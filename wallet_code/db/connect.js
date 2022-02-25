@@ -3,8 +3,7 @@ const mongoose = require("mongoose");
 const db_connection=(url)=>{mongoose.connect(url,
   {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
+    useUnifiedTopology: true
   }, () => {
   console.log("db connected successfully");
 })};
