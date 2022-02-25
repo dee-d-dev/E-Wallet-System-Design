@@ -1,3 +1,4 @@
+const reg_user = require('../controllers/register_user.controller')
 describe('test fro regsitration contrller', ()=> {
-    it()
+    it("should return a user", ())
 })
