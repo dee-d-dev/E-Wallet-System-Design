@@ -1,6 +1,6 @@
-const paystack = require("paystack-api")(
-  "sk_test_723267d27d39f05c69be023050abd2bf2e48684e"
-);
+// const paystack = require("paystack-api")(
+//   "sk_test_723267d27d39f05c69be023050abd2bf2e48684e"
+// );
 
 const request = require("request");
 
