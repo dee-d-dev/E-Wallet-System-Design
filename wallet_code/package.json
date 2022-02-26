@@ -17,6 +17,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.3",
     "nodemon": "^2.0.15",
+    "paystack-api": "^2.0.6",
     "supertest": "^6.2.2"
   },
   "directories": {
