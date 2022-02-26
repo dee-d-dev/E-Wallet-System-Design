@@ -18,6 +18,7 @@
     "mongoose": "^6.2.3",
     "nodemon": "^2.0.15",
     "paystack-api": "^2.0.6",
+    "request": "^2.88.2",
     "supertest": "^6.2.2"
   },
   "directories": {
