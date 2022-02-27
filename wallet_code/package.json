@@ -15,12 +15,14 @@
     "jest": "^27.5.1",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
     "mongoose": "^6.2.3",
     "nodemon": "^2.0.15",
     "paystack-api": "^2.0.6",
     "pug": "^3.0.2",
     "request": "^2.88.2",
-    "supertest": "^6.2.2"
+    "supertest": "^6.2.2",
+    "uuidv4": "^6.2.12"
   },
   "directories": {
     "test": "tests"
