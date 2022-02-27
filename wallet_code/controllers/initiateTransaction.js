@@ -13,7 +13,7 @@ exports.initiateTransaction = (req, res) => {
       source: "balance",
       reason: req.body.reason,
       amount: req.body.amount,
-      recipient: "RCP_gx2wn530m0i3w3m",
+      recipient: req.body.recipient,
     },
   };
   console.log(options.form.recipient);
