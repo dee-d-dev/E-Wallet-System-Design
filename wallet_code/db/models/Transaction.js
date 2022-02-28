@@ -20,7 +20,7 @@ const mongoose = require("mongoose");
 const transactionSchema = new mongoose.Schema(
   {
     userId: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "user",
     },
     transactionId: {
@@ -49,7 +49,7 @@ const transactionSchema = new mongoose.Schema(
       required: [true, "currency is required"],
       default: "NGN",
     },
-    paymentStatus: {
+    payment_status: {
       type: String,
       enum: ["successful", "pending", "failed"],
       default: "pending",

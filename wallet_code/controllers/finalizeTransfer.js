@@ -1,11 +1,12 @@
 var request = require("request");
+const User = require('../db/models/User')
 
 exports.finalizeTransfer = (req, res) => {
-  var options = {
+  let options = {
     method: "POST",
     url: "https://api.paystack.co/transfer/finalize_transfer",
     headers: {
-      Authorization: "Bearer SECRET_KEY",
+      Authorization: `Bearer ${process.env.SECRET_KEY}`,
       "Content-Type": "application/json",
     },
     form: {
@@ -15,6 +16,6 @@ exports.finalizeTransfer = (req, res) => {
   };
   request(options, function (error, response) {
     if (error) throw new Error(error);
-    console.log(response.body);
+    res.send(response.body);
   });
 };
