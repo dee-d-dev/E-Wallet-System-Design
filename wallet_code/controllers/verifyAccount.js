@@ -9,8 +9,8 @@ exports.verifyAccount = (req, res) => {
     formData: {},
   };
   console.log(req.body.ACCOUNT_NUMBER);
-  //   request(options, function (error, response) {
-  //     if (error) throw new Error(error);
-  //     res.send(response.body);
-  //   });
+    request(options, function (error, response) {
+      if (error) throw new Error(error);
+      res.send(response.body);
+    });
 };
