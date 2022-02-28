@@ -13,6 +13,7 @@ exports.initiateTransfer = (req, res) => {
       source: "balance",
       reason: req.body.reason,
       amount: req.body.amount,
+      email: req.body.email,
       recipient: req.body.recipient,
     },
   };

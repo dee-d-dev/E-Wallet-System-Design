@@ -47,7 +47,7 @@ const transactionSchema = new mongoose.Schema(
     currency: {
       type: String,
       required: [true, "currency is required"],
-      enum: ["NGN", "USD", "EUR", "GBP"],
+      default: "NGN",
     },
     paymentStatus: {
       type: String,
@@ -57,7 +57,7 @@ const transactionSchema = new mongoose.Schema(
     paymentGateway: {
       type: String,
       required: [true, "payment gateway is required"],
-      enum: ["fPaystack"],
+      enum: ["Paystack"],
     },
   },
   {

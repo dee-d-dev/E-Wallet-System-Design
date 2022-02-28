@@ -9,15 +9,17 @@ exports.transferRecipient = (req, res) => {
     },
     form: {
       type: "nuban",
-      name: req.body.name,
-      description: req.body.description,
+      // name: req.body.name,
+      // description: req.body.description,
+      email: req.body.email,
       account_number: req.body.account_number,
-      bank_code: req.body.bank_code,
-      currency: req.body.currency,
+        bank_code: req.body.bank_code,
+      //   currency: req.body.currency,
     },
   };
   request(options, function (error, response) {
     if (error) throw new Error(error);
     res.send(response.body);
   });
+
 };

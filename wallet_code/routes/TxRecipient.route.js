@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const {
   transferRecipient
-} = require("../controllers/transferRecipient.js");
+} = require("../controllers/txRecipient.js");
 
-router.post("/transferrecipient", transferRecipient);
+router.post("/txrecipient", transferRecipient);
 
 module.exports = router;
