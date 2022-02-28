@@ -1,7 +1,7 @@
 const request = require("request");
 const uuid = require("uuidv4");
 
-exports.initiateTransaction = (req, res) => {
+exports.initiateTransfer = (req, res) => {
   var options = {
     method: "POST",
     url: "https://api.paystack.co/transfer",

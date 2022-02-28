@@ -10,13 +10,15 @@ app.use(express.json());
 
 const register_user = require("./routes/reg_user.route.js");
 const login_user = require("./routes/login_user.route.js");
-const initiateTransaction = require("./routes/initiateTx.route.js");
+const initiateTransfer = require("./routes/initiateTf.route.js");
 const verifyAccount = require("./routes/verifyAccount.route");
 const txRecipient = require("./routes/TxRecipient.route");
+const finalizeTransfer = require("./routes/finalizeTransfer.route");
 
 app.use("/api/v1", verifyAccount);
 app.use("/api/v1", txRecipient);
-app.use("/api/v1", initiateTransaction);
+app.use("/api/v1", initiateTransfer);
+app.use("/api/v1", finalizeTransfer);
 
 app.use("/api/v1", register_user);
 app.use("/api/v1", login_user);
