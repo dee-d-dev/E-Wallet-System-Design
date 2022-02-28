@@ -13,7 +13,7 @@ exports.transferRecipient = (req, res) => {
       // description: req.body.description,
       email: req.body.email,
       account_number: req.body.account_number,
-        bank_code: req.body.bank_code,
+      bank_code: req.body.bank_code,
       //   currency: req.body.currency,
     },
   };
@@ -21,5 +21,4 @@ exports.transferRecipient = (req, res) => {
     if (error) throw new Error(error);
     res.send(response.body);
   });
-
 };

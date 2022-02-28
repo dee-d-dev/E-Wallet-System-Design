@@ -44,21 +44,6 @@ const transactionSchema = new mongoose.Schema(
       type: Number,
       required: [true, "amount is required"],
     },
-    currency: {
-      type: String,
-      required: [true, "currency is required"],
-      default: "NGN",
-    },
-    payment_status: {
-      type: String,
-      enum: ["successful", "pending", "failed"],
-      default: "pending",
-    },
-    paymentGateway: {
-      type: String,
-      required: [true, "payment gateway is required"],
-      enum: ["Paystack"],
-    },
   },
   {
     timestamps: true,

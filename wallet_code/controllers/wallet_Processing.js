@@ -23,7 +23,12 @@ exports.validateUserWallet = async (userId) => {
 };
 
 // Create Wallet Transaction
-exports.createWalletTransaction = async (userId, payment_status, currency, amount) => {
+exports.createWalletTransaction = async (
+  userId,
+  payment_status,
+  currency,
+  amount
+) => {
   try {
     // create wallet transaction
     const walletTransaction = await Wallet_TX.create({
@@ -68,7 +73,7 @@ exports.createTransaction = async (
 };
 
 // Update wallet
-exports.updateWallet = async (req, res,userId, amount) => {
+exports.updateWallet = async (userId, amount) => {
   try {
     // update wallet
     const wallet = await Wallet.findOneAndUpdate(
@@ -78,6 +83,6 @@ exports.updateWallet = async (req, res,userId, amount) => {
     );
     return wallet;
   } catch (error) {
-    res.send(error.message);
+    console.log(error.message);
   }
 };
