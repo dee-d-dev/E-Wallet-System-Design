@@ -18,4 +18,8 @@ exports.finalizeTransfer = (req, res) => {
     if (error) throw new Error(error);
     res.send(response.body);
   });
+
+  const incrementWallet = () => {
+    
+  }
 };
