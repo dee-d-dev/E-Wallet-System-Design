@@ -23,7 +23,7 @@ exports.validateUserWallet = async (userId) => {
 };
 
 // Create Wallet Transaction
-exports.createWalletTransaction = async (userId, status, currency, amount) => {
+exports.createWalletTransaction = async (userId, payment_status, currency, amount) => {
   try {
     // create wallet transaction
     const walletTransaction = await Wallet_TX.create({
@@ -31,7 +31,7 @@ exports.createWalletTransaction = async (userId, status, currency, amount) => {
       userId,
       isInflow: true,
       currency,
-      status,
+      // payment_status,
     });
     return walletTransaction;
   } catch (error) {
@@ -68,7 +68,7 @@ exports.createTransaction = async (
 };
 
 // Update wallet
-exports.updateWallet = async (userId, amount) => {
+exports.updateWallet = async (req, res,userId, amount) => {
   try {
     // update wallet
     const wallet = await Wallet.findOneAndUpdate(

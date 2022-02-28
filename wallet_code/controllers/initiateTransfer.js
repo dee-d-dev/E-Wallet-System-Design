@@ -5,6 +5,7 @@ const {
   validateUserWallet,
   createWalletTransaction,
   createTransaction,
+  updateWallet,
 } = require("./wallet_Processing");
 
 exports.initiateTransfer = async (req, res) => {
@@ -21,6 +22,7 @@ exports.initiateTransfer = async (req, res) => {
       amount: req.body.amount,
       email: req.body.email,
       recipient: req.body.recipient,
+      currency: "NGN",
     },
   };
 
@@ -31,23 +33,25 @@ exports.initiateTransfer = async (req, res) => {
   const wallet = await validateUserWallet(user._id);
 
   // create wallet transaction
-  await createWalletTransaction(user._id, payment_status, currency, amount);
+  await createWalletTransaction({
+    userId: user._id,
+    currency: req.body.currency,
+    amount: req.body.amount,
+  });
 
   // create transaction
-  await createTransaction(
-    user._id,
-    id,
-    payment_status,
-    currency,
-    amount,
-    customer
-  );
+  await createTransaction({
+    userId: user._id,
+    currency: req.body.currency,
+    amount: req.body.amount,
+    user: user,
+  });
 
   //update wallet
-  await updateWallet(user._id, amount);
+  await updateWallet({ userId: user._id, amount: req.body.amount });
 
   request(options, function (error, response) {
     if (error) throw new Error(error);
-    res.send(response.body);
+    console.log(response.body);
   });
 };
