@@ -11,7 +11,11 @@ app.use(express.json());
 const register_user = require("./routes/reg_user.route.js");
 const login_user = require("./routes/login_user.route.js");
 const initiateTransaction = require("./routes/initiateTx.route.js");
+const verifyAccount = require("./routes/verifyAccount.route");
+const txRecipient = require("./routes/TxRecipient.route");
 
+app.use("/api/v1", verifyAccount);
+app.use("/api/v1", txRecipient);
 app.use("/api/v1", initiateTransaction);
 
 app.use("/api/v1", register_user);
