@@ -1,6 +1,6 @@
 var request = require("request");
 const User = require("../db/models/User");
-const Wallet = require("../db/models/wallet");
+const Wallet = require("../db/models/account");
 
 exports.finalizeTransfer = (req, res) => {
   let options = {
