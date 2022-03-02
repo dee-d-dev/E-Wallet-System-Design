@@ -35,23 +35,6 @@ app.post(
   }
 );
 
-let crypto = require("crypto");
-
-// Using Express
-app.post("/my/webhook/url", function (req, res) {
-  //validate event
-  var hash = crypto
-    .createHmac("sha512", process.env.SECRET_KEY)
-    .update(JSON.stringify(req.body))
-    .digest("hex");
-  if (hash == req.headers["x-paystack-signature"]) {
-    // Retrieve the request's body
-    var event = req.body;
-    // Do something with event
-  }
-  res.send(200);
-});
-
 app.listen(5000, () => {
   console.log(`running on 5000`);
 });

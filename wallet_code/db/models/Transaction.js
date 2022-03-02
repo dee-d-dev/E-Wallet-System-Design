@@ -19,13 +19,19 @@ const mongoose = require("mongoose");
 
 const transactionSchema = new mongoose.Schema(
   {
-    userId: {
+    user_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
     },
-    transactionId: {
+    transaction_id: {
       type: Number,
       trim: true,
+      required: true,
+    },
+    transaction_type: {
+      type: String,
+      required: true,
+      enum: ["debit", "credit"],
     },
     name: {
       type: String,
