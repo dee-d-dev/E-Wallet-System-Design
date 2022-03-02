@@ -1,5 +1,6 @@
 var request = require("request");
-const User = require('../db/models/User')
+const User = require("../db/models/User");
+const Wallet = require("../db/models/wallet");
 
 exports.finalizeTransfer = (req, res) => {
   let options = {
@@ -18,8 +19,4 @@ exports.finalizeTransfer = (req, res) => {
     if (error) throw new Error(error);
     res.send(response.body);
   });
-
-  const incrementWallet = () => {
-    
-  }
 };
