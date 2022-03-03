@@ -1,11 +1,15 @@
-
 const mongoose = require("mongoose");
-
+const { v4 } = require("uuidv4");
 const transactionSchema = new mongoose.Schema(
   {
     user_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
+    },
+    description: {
+      type: String,
+      enum: ["credit", "debit"],
+      required: true,
     },
     transaction_id: {
       type: Number,
@@ -17,20 +21,20 @@ const transactionSchema = new mongoose.Schema(
       required: true,
       enum: ["debit", "credit"],
     },
-
-    name: {
-      type: String,
-      required: [true, "name is required"],
-      trim: true,
-    },
     email: {
       type: String,
       required: [true, "email is required"],
       trim: true,
     },
-    phone: {
+    balanceBefore: {
       type: String,
+      required: true
     },
+    balanceAfter: {
+      type: String,
+      required: true
+    },
+    reference: v4(),
     amount: {
       type: Number,
       required: [true, "amount is required"],
