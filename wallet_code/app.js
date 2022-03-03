@@ -14,13 +14,14 @@ const fund_wallet = require("./routes/fund_wallet.route.js");
 const verifyAccount = require("./routes/verifyAccount.route");
 const txRecipient = require("./routes/TxRecipient.route");
 const finalizeTransfer = require("./routes/finalizeTransfer.route");
-const sendMoney = require("./routes/sendMoney.route");
+const sendMoney = require("./routes/sendMoney");
+const Wallet = require("./db/models/wallet");
 
 app.use("/api/v1", verifyAccount);
 app.use("/api/v1", txRecipient);
 app.use("/api/v1", fund_wallet);
 app.use("/api/v1", finalizeTransfer);
-app.use("/api/v1/", sendMoney);
+app.use("/api/v1", sendMoney);
 
 app.use("/api/v1", register_user);
 app.use("/api/v1", login_user);
@@ -35,6 +36,12 @@ app.post(
   }
 );
 
+app.get("/wallet/:id", async(req, res) => {
+  let id = req.params.id;
+  const wallet = await Wallet.findOne({ id });
+
+  res.send(wallet);
+});
 app.listen(5000, () => {
   console.log(`running on 5000`);
 });

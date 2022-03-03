@@ -6,16 +6,7 @@ const walletSchema = Schema(
     user_id: {
       type: Schema.Types.ObjectId,
       ref: "user",
-    },
-    created_at: {
-      type: Date,
-      default: Date.now(),
-      required: true,
-    },
-    updated_at: {
-      type: Date,
-      default: Date.now(),
-    },
+    }
   },
   { timestamps: true }
 );

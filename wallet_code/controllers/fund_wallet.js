@@ -1,14 +1,12 @@
 const request = require("request");
 const uuid = require("uuidv4");
 const User = require("../db/models/User");
-const {
-  validateUserWallet,
-  createWalletTransaction,
-  createTransaction,
-  updateWallet,
-} = require("./wallet_Processing");
+const Wallet = require("../db/models/wallet");
 
 exports.fund_wallet = async (req, res) => {
+  const { id } = req.params;
+  const wallet = await Wallet.findOne({ id });
+  res.send(wallet);
   var options = {
     method: "POST",
     url: "https://api.paystack.co/transfer",
@@ -28,6 +26,6 @@ exports.fund_wallet = async (req, res) => {
 
   request(options, function (error, response) {
     if (error) throw new Error(error);
-    res.send(response.body);
+    // res.send(response.body);
   });
 };
