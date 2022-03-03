@@ -8,7 +8,7 @@ const {
   updateWallet,
 } = require("./wallet_Processing");
 
-exports.initiateTransfer = async (req, res) => {
+exports.fund_wallet = async (req, res) => {
   var options = {
     method: "POST",
     url: "https://api.paystack.co/transfer",
