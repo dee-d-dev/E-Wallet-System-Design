@@ -1,10 +1,10 @@
 const User = require("../db/models/User");
 const bcrypt = require("bcrypt");
 const joi = require("joi");
+const wallet = require("../db/models/wallet");
 
 const reg_user = async (req, res) => {
   const user = new User(req.body);
-  const wallet = require("../db/models/wallet");
   const { email } = req.body;
 
   if (user) {
@@ -16,8 +16,11 @@ const reg_user = async (req, res) => {
       user
         .save()
         .then((user) => {
-          // console.log(user);
-          res.status(201).send(user);
+       
+          res.status(201).send({
+            success: true,
+            message: "created successfully",
+          });
         })
         .catch((err) => {
           res.send(err._message);
