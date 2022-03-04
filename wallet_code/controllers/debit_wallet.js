@@ -10,6 +10,15 @@ exports.debit_wallet = async (req, res) => {
   };
   const { wallet_id, amount, reason, recipient } = req.body;
 
+//   const walletAmount = await Wallet.findById(wallet_id);
+
+//   if (walletAmount.balance < amount) {
+//     return res.send({
+//       success: false,
+//       message: "Insuffucient Funds",
+//     });
+//   }
+
   const wallet = await Wallet.findByIdAndUpdate(
     wallet_id,
     {
@@ -18,7 +27,7 @@ exports.debit_wallet = async (req, res) => {
     { new: true }
   );
 
-//   wallet.balance = amount;
+  //   wallet.balance = amount;
 
   if (!wallet)
     res.send({
