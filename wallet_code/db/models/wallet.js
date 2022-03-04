@@ -6,7 +6,7 @@ const walletSchema = Schema(
     user_id: {
       type: Schema.Types.ObjectId,
       ref: "user",
-    }
+    },
   },
   { timestamps: true }
 );

@@ -36,12 +36,7 @@ app.post(
   }
 );
 
-app.get("/wallet/:id", async(req, res) => {
-  let id = req.params.id;
-  const wallet = await Wallet.findOne({ id });
 
-  res.send(wallet);
-});
 app.listen(5000, () => {
   console.log(`running on 5000`);
 });
