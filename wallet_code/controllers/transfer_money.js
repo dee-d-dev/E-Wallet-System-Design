@@ -10,6 +10,7 @@ exports.transfer_money = (req, res) => {
   if (sender && receiver) {
     const sender_wallet = Wallet.findById(sender_wallet_id);
     const receiver_wallet = Wallet.findById(receiver_wallet_id);
-    
   }
+
+  console.log(sender, receiver)
 };
