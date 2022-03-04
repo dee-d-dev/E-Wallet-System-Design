@@ -18,7 +18,7 @@ exports.debit_wallet = async (req, res) => {
     { new: true }
   );
 
-  wallet.balance = amount;
+//   wallet.balance = amount;
 
   if (!wallet)
     res.send({
