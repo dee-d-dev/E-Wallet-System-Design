@@ -1,40 +1,34 @@
 const mongoose = require("mongoose");
-const { v4 } = require("uuidv4");
 const transactionSchema = new mongoose.Schema(
   {
-   wallet_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'wallet'
-   },
+    wallet_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "wallet",
+    },
     description: {
       type: String,
-      enum: ["credit", "debit"],
       required: true,
     },
     transaction_id: {
       type: Number,
       trim: true,
-      required: true,
     },
     transaction_type: {
       type: String,
       required: true,
       enum: ["debit", "credit"],
     },
-    email: {
-      type: String,
-      required: [true, "email is required"],
-      trim: true,
-    },
+
     balanceBefore: {
-      type: String,
-      required: true,
+      type: Number,
     },
     balanceAfter: {
-      type: String,
-      required: true,
+      type: Number,
     },
-    reference: v4(),
+    reference: {
+      type: String,
+      unique: true,
+    },
     amount: {
       type: Number,
       required: [true, "amount is required"],
