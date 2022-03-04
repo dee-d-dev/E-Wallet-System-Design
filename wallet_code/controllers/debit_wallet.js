@@ -10,8 +10,15 @@ exports.debit_wallet = async (req, res) => {
   };
   const { wallet_id, amount, reason, recipient } = req.body;
 
-  const wallet = await Wallet.findById(wallet_id);
-  wallet.balance -= amount;
+  const wallet = await Wallet.findByIdAndUpdate(
+    wallet_id,
+    {
+      $inc: { balance: -amount },
+    },
+    { new: true }
+  );
+
+  wallet.balance = amount;
 
   if (!wallet)
     res.send({
@@ -24,13 +31,17 @@ exports.debit_wallet = async (req, res) => {
     transaction_type: "debit",
     description: reason,
     balanceBefore: wallet.balance,
-    balanceAfter: wallet.balance-amount,
-    amount: amount
+    balanceAfter: {
+      $inc: {
+        balance: balanceBefore - amount,
+      },
+    },
+    amount: amount,
     // reference: uuidv4,
   });
 
   res.send({
     success: true,
-    amount: wallet.balance,
+    amount: balanceAfter,
   });
 };
