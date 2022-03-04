@@ -27,7 +27,7 @@ const transactionSchema = new mongoose.Schema(
     // reference: {
     //   type: String,
     // },
-    amount_deposited: {
+    amount: {
       type: Number,
       required: [true, "amount is required"],
     },

@@ -6,17 +6,17 @@ const Transaction = require("../db/models/Transaction");
 const { uuidv4 } = require("uuidv4");
 
 exports.fund_wallet = async (req, res) => {
-  var options = {
-    form: {
-      source: "balance",
-      reason: req.body.reason,
-      amount: req.body.amount,
-      email: req.body.email,
-      recipient: req.body.recipient,
-      wallet_id: req.body.wallet_id,
-      currency: "NGN",
-    },
-  };
+  // var options = {
+  //   form: {
+  //     source: "balance",
+  //     reason: req.body.reason,
+  //     amount: req.body.amount,
+  //     email: req.body.email,
+  //     recipient: req.body.recipient,
+  //     wallet_id: req.body.wallet_id,
+  //     currency: "NGN",
+  //   },
+  // };
 
   const { wallet_id, amount, reason, recipient } = req.body;
 
@@ -37,7 +37,7 @@ exports.fund_wallet = async (req, res) => {
     wallet_id: wallet_id,
     transaction_type: "credit",
     amount_deposited: amount,
-    description: req.body.reason,
+    description: reason,
     balanceBefore: wallet.balance-amount,
     balanceAfter: wallet.balance,
     // reference: uuidv4,
