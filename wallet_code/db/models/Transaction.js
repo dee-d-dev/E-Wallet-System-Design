@@ -18,18 +18,16 @@ const transactionSchema = new mongoose.Schema(
       required: true,
       enum: ["debit", "credit"],
     },
-
     balanceBefore: {
       type: Number,
     },
     balanceAfter: {
       type: Number,
     },
-    reference: {
-      type: String,
-      unique: true,
-    },
-    amount: {
+    // reference: {
+    //   type: String,
+    // },
+    amount_deposited: {
       type: Number,
       required: [true, "amount is required"],
     },

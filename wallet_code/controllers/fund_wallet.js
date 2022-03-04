@@ -36,11 +36,11 @@ exports.fund_wallet = async (req, res) => {
   await Transaction.create({
     wallet_id: wallet_id,
     transaction_type: "credit",
-    amount: amount,
+    amount_deposited: amount,
     description: req.body.reason,
-    balanceBefore: wallet.balance,
-    balanceAfter: wallet.balance + amount,
-    reference: uuidv4,
+    balanceBefore: wallet.balance-amount,
+    balanceAfter: wallet.balance,
+    // reference: uuidv4,
   });
   return res.send({
     success: true,

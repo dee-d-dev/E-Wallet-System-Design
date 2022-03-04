@@ -26,7 +26,7 @@ const reg_user = async (req, res) => {
           console.log(err);
         });
 
-      wallet.create({ balance: 600000, user_id: user.id, new: true });
+      wallet.create({ balance: 0, user_id: user.id, new: true });
     } else {
       res.status(400).send("this email has already been registered");
     }
