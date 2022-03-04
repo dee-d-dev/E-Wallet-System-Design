@@ -31,17 +31,13 @@ exports.debit_wallet = async (req, res) => {
     transaction_type: "debit",
     description: reason,
     balanceBefore: wallet.balance,
-    balanceAfter: {
-      $inc: {
-        balance: balanceBefore - amount,
-      },
-    },
+    balanceAfter: wallet.balance - amount,
     amount: amount,
     // reference: uuidv4,
   });
 
   res.send({
     success: true,
-    amount: balanceAfter,
+    amount: wallet.balance,
   });
 };
