@@ -20,11 +20,12 @@ const reg_user = async (req, res) => {
 
   user.password = hashedPassword;
 
-  let wallet = Wallet.create({ balance: 0, new: true });
+  let wallet = await Wallet.create({ balance: 0, new: true });
   // user_id: user.id;
 
+  user.wallet_id = wallet._id;
   await user
-    .save({ wallet_id: wallet.id })
+    .save()
     .then((user) => {
       res.status(201).send({
         success: true,
