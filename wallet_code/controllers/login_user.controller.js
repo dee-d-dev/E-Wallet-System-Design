@@ -29,7 +29,7 @@ const login_user = async (req, res) => {
   let authenticate = await bcrypt.compare(password, user.password);
   if (!authenticate) res.send("incorrect email or password");
 
-  const token = jwt.sign(
+  exports.token = jwt.sign(
     { data: user.name, iss: "adedotun" },
     process.env.TOKEN_KEY,
     {
@@ -41,4 +41,4 @@ const login_user = async (req, res) => {
   res.header("bearer", token).send(token);
 };
 
-module.exports = login_user;
+module.exports = { login_user};

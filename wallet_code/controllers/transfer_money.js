@@ -1,5 +1,6 @@
 const Wallet = require("../db/models/wallet");
 const User = require("../db/models/User");
+const Transaction = require("../db/models/Transaction");
 
 //you can send money to another via email
 exports.transfer_money = async (req, res) => {
@@ -9,6 +10,7 @@ exports.transfer_money = async (req, res) => {
     amount,
     sender_wallet_id,
     receiver_wallet_id,
+    reason,
   } = req.body;
   const sender = await User.findOne({ email: sender_email }).populate(
     "wallet_id"
@@ -27,6 +29,7 @@ exports.transfer_money = async (req, res) => {
         {
           $inc: { balance: amount },
         },
+
         { new: true }
       );
       const sender_balance = await Wallet.findByIdAndUpdate(
@@ -37,9 +40,21 @@ exports.transfer_money = async (req, res) => {
         { new: true }
       );
 
-      res.status(200).send({ success: true, amount: amount });
+      await Transaction.create({
+        wallet_id: receiver.wallet_id,
+        transaction_type: "credit",
+        amount: amount,
+        description: reason,
+        balanceBefore: receiver_wallet.balance,
+        balanceAfter: receiver_wallet.balance + amount,
+        // reference: uuidv4,
+        //transaction_status: ['success', 'failed', 'pending']
+      }),
+        res.status(200).send({ success: true, amount: amount });
     } else {
       res.send({ success: false, message: "Insufficient balance" });
     }
+
+    //Add transactions for the transfers
   }
 };

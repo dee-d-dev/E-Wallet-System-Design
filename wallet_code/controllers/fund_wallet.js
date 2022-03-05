@@ -4,9 +4,9 @@ const User = require("../db/models/User");
 const Wallet = require("../db/models/wallet");
 const Transaction = require("../db/models/Transaction");
 const { uuidv4 } = require("uuidv4");
+const { token } = require("./login_user.controller");
 
 exports.fund_wallet = async (req, res) => {
-
   const { wallet_id, amount, reason, recipient } = req.body;
 
   const wallet = await Wallet.findByIdAndUpdate(
@@ -30,8 +30,9 @@ exports.fund_wallet = async (req, res) => {
     balanceBefore: wallet.balance - amount,
     balanceAfter: wallet.balance,
     // reference: uuidv4,
+    //transaction_status: ['success', 'failed', 'pending']
   });
-  return res.send({
+  return res.header("x-auth-token", token).send({
     success: true,
     amount: wallet.balance,
   });
