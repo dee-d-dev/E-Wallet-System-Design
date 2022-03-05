@@ -24,7 +24,6 @@ app.use("/api/v1", verifyAccount);
 app.use("/api/v1", txRecipient);
 app.use("/api/v1", fund_wallet);
 app.use("/api/v1", finalizeTransfer);
-app.use("/api/v1", sendMoney);
 
 app.use("/api/v1", register_user);
 app.use("/api/v1", login_user);

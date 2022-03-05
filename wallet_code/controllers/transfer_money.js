@@ -1,6 +1,7 @@
 const Wallet = require("../db/models/wallet");
 const User = require("../db/models/User");
 
+//you can send money to another via email
 exports.transfer_money = async (req, res) => {
   const {
     sender_email,
