@@ -24,6 +24,7 @@ const reg_user = async (req, res) => {
   // user_id: user.id;
 
   user.wallet_id = wallet._id;
+
   await user
     .save()
     .then((user) => {
