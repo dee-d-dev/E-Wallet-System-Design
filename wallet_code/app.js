@@ -17,6 +17,7 @@ const finalizeTransfer = require("./routes/finalizeTransfer.route");
 const sendMoney = require("./routes/sendMoney");
 const debit_wallet = require("./routes/debit_wallet");
 const create_wallet = require("./routes/create_wallet");
+const transfer_money = require("./routes/transfer_money.route");
 const Wallet = require("./db/models/wallet");
 
 app.use("/api/v1", verifyAccount);
@@ -29,6 +30,7 @@ app.use("/api/v1", register_user);
 app.use("/api/v1", login_user);
 app.use("/api/v1", debit_wallet);
 app.use("/api/v1", create_wallet);
+app.use("/api/v1", transfer_money);
 
 app.post(
   "https://web.hook.sh/#/9e087a6d-b602-4da3-838a-984481f824a6/5834caba-9566-4772-911a-18d95d121163",
