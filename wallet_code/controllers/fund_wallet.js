@@ -5,6 +5,7 @@ const Wallet = require("../db/models/wallet");
 const Transaction = require("../db/models/Transaction");
 const { uuidv4 } = require("uuidv4");
 const { token } = require("./login_user.controller");
+const jwt = require("jsonwebtoken");
 
 exports.fund_wallet = async (req, res) => {
   const { wallet_id, amount, reason, recipient } = req.body;
@@ -32,6 +33,15 @@ exports.fund_wallet = async (req, res) => {
     // reference: uuidv4,
     //transaction_status: ['success', 'failed', 'pending']
   });
+
+  const token = jwt.sign(
+    { data: user.name, iss: "adedotun" },
+    process.env.TOKEN_KEY,
+    {
+      expiresIn: "24h",
+    }
+  );
+
   return res.header("x-auth-token", token).send({
     success: true,
     amount: wallet.balance,
