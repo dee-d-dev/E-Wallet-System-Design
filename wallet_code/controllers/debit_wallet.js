@@ -2,22 +2,23 @@ const Wallet = require("../db/models/wallet");
 const Transaction = require("../db/models/Transaction");
 
 exports.debit_wallet = async (req, res) => {
-  let options = {
-    form: {
-      amount: req.body.amount,
-      wallet_id: req.body.wallet_id,
-    },
-  };
+  // let options = {
+  //   form: {
+  //     amount: req.body.amount,
+  //     wallet_id: req.body.wallet_id,
+  //   },
+  // };
   const { wallet_id, amount, reason, recipient } = req.body;
 
-  //   const walletAmount = await Wallet.findById(wallet_id);
+    const walletAmount = await Wallet.findById(wallet_id);
+    console.log(walletAmount)
 
-  //   if (walletAmount.balance < amount) {
-  //     return res.send({
-  //       success: false,
-  //       message: "Insuffucient Funds",
-  //     });
-  //   }
+    if (walletAmount.balance < amount) {
+      return res.send({
+        success: false,
+        message: "Insuffucient Funds",
+      });
+    }
 
   const wallet = await Wallet.findByIdAndUpdate(
     wallet_id,
@@ -47,6 +48,6 @@ exports.debit_wallet = async (req, res) => {
 
   res.send({
     success: true,
-    amount: wallet.balance,
+    wallet_balance: wallet.balance,
   });
 };
