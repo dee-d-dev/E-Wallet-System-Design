@@ -26,6 +26,14 @@ exports.debit_wallet = async (req, res) => {
     { new: true }
   );
 
+  let transaction = await Transaction.create({
+    wallet_id: wallet_id,
+    transaction_type: "debit",
+    description: reason,
+    balanceBefore: wallet.balance,
+    amount: amount,
+    // reference: uuidv4,
+  });
   //   wallet.balance = amount;
 
   if (!wallet)
@@ -34,15 +42,9 @@ exports.debit_wallet = async (req, res) => {
       message: "wallet does not exist",
     });
 
-  await Transaction.create({
-    wallet_id: wallet_id,
-    transaction_type: "debit",
-    description: reason,
-    balanceBefore: wallet.balance,
-    balanceAfter: wallet.balance - amount,
-    amount: amount,
-    // reference: uuidv4,
-  });
+  transaction.balanceAfter = wallet.balance - amount;
+
+  await transaction.save();
 
   res.send({
     success: true,
