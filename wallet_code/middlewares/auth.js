@@ -12,10 +12,10 @@ const verifyToken = (req, res, next) => {
     return res.status(403).send("Unauthorised");
   }
 
-  const decoded = jwt.verify(req.token, process.env.TOKEN_KEY, (err) => {
+  jwt.verify(req.token, process.env.TOKEN_KEY, (err, decoded) => {
     if (err) return res.status(401).send("Invalid Token");
+    req.decoded = decoded;
   });
-  req.user = decoded;
 
   return next();
 };

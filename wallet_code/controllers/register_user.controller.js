@@ -21,7 +21,11 @@ const reg_user = async (req, res) => {
 
   user.password = hashedPassword;
 
-  let wallet = await Wallet.create({ balance: 0, new: true });
+  let wallet = await Wallet.create({
+    balance: 0,
+    new: true,
+    password: hashedPassword,
+  });
   // user_id: user.id;
 
   user.wallet_id = wallet._id;
@@ -35,7 +39,7 @@ const reg_user = async (req, res) => {
     });
 
   let token = await jwt.sign(
-    { id: user._id, iss: "adedotun" },
+    { email: user.email, iss: "adedotun" },
     process.env.TOKEN_KEY,
     {
       expiresIn: "24h",

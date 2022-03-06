@@ -1,24 +1,22 @@
 const Wallet = require("../db/models/wallet");
 const Transaction = require("../db/models/Transaction");
+const User = require("../db/models/User");
+const jwt_decode = require("jwt-decode");
+const jwt = require("jsonwebtoken");
+const { token } = require("../controllers/login_user.controller");
 
 exports.debit_wallet = async (req, res) => {
-  // let options = {
-  //   form: {
-  //     amount: req.body.amount,
-  //     wallet_id: req.body.wallet_id,
-  //   },
-  // };
+  
   const { wallet_id, amount, reason, recipient } = req.body;
 
-    const walletAmount = await Wallet.findById(wallet_id);
-    console.log(walletAmount)
+  const walletAmount = await Wallet.findById(wallet_id);
 
-    if (walletAmount.balance < amount) {
-      return res.send({
-        success: false,
-        message: "Insuffucient Funds",
-      });
-    }
+  if (walletAmount.balance < amount) {
+    return res.send({
+      success: false,
+      message: "Insuffucient Funds",
+    });
+  }
 
   const wallet = await Wallet.findByIdAndUpdate(
     wallet_id,

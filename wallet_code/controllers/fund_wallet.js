@@ -8,18 +8,12 @@ const { uuidv4 } = require("uuidv4");
 const jwt = require("jsonwebtoken");
 
 exports.fund_wallet = async (req, res) => {
-  const { wallet_id, amount, reason, recipient } = req.body;
-  // const token = req.headers["x-access-token"];
-  // if (!token) return res.send("no token provided");
+  
+  const user = await User.findOne({ email: req.decoded.email });
+  console.log(user);
+  const wallet_id = user.wallet_id;
+  const { amount, reason, recipient } = req.body;
 
-  // jwt.verify(token, process.env.TOKEN_KEY, (err, decoded) => {
-  //   if (err)
-  //     return res
-  //       .status(500)
-  //       .send({ auth: false, message: "Failed to authenticate token." });
-
-  //   res.status(200).send(decoded);
-  // });
 
   const wallet = await Wallet.findByIdAndUpdate(
     wallet_id,

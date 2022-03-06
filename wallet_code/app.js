@@ -11,8 +11,6 @@ app.use(express.json());
 const register_user = require("./routes/reg_user.route.js");
 const login_user = require("./routes/login_user.route.js");
 const fund_wallet = require("./routes/fund_wallet.route.js");
-const txRecipient = require("./routes/TxRecipient.route");
-const finalizeTransfer = require("./routes/finalizeTransfer.route");
 
 const debit_wallet = require("./routes/debit_wallet");
 const create_wallet = require("./routes/create_wallet");
@@ -20,9 +18,7 @@ const transfer_money = require("./routes/transfer_money.route");
 const Wallet = require("./db/models/wallet");
 const verifyToken = require("./middlewares/auth");
 
-app.use("/api/v1", txRecipient);
 app.use("/api/v1", fund_wallet);
-app.use("/api/v1", finalizeTransfer);
 
 app.use("/api/v1", register_user);
 app.use("/api/v1", login_user);
@@ -38,7 +34,6 @@ app.post("/my/webhook/url", function (req, res) {
 });
 
 app.post("/webhook/url", (req, res) => {});
-
 
 app.listen(5000, () => {
   console.log(`running on 5000`);

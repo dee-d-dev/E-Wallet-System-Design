@@ -30,7 +30,7 @@ const login_user = async (req, res) => {
 
   //generate token
   let token = jwt.sign(
-    { id: user._id, iss: "adedotun" },
+    { email: user.email, iss: "adedotun" },
     process.env.TOKEN_KEY,
     {
       expiresIn: "24h",
@@ -38,7 +38,8 @@ const login_user = async (req, res) => {
   );
 
   user.token = token;
-  
+
+  exports.token;
   res.header("x-access-token", token).send({
     login: "success",
     token: token,

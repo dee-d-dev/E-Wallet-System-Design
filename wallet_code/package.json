@@ -16,6 +16,7 @@
     "jest": "^27.5.1",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
     "mongoose": "^6.2.3",
     "nodemon": "^2.0.15",
