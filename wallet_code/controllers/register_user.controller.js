@@ -1,6 +1,7 @@
 const User = require("../db/models/User");
 const bcrypt = require("bcrypt");
 const joi = require("joi");
+const jwt = require("jsonwebtoken");
 const Wallet = require("../db/models/wallet");
 
 const reg_user = async (req, res) => {
@@ -27,16 +28,27 @@ const reg_user = async (req, res) => {
 
   await user
     .save()
-    .then((user) => {
-      res.status(201).send({
-        success: true,
-        message: "created successfully",
-      });
-    })
+    .then((user) => {})
     .catch((err) => {
       res.send(err._message);
       console.log(err);
     });
+
+  let token = await jwt.sign(
+    { id: user._id, iss: "adedotun" },
+    process.env.TOKEN_KEY,
+    {
+      expiresIn: "24h",
+    }
+  );
+
+  user.token = token;
+
+  res.status(201).send({
+    success: true,
+    message: "created successfully",
+    token: token,
+  });
 };
 
 module.exports = reg_user;

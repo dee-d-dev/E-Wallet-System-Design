@@ -18,6 +18,7 @@ const debit_wallet = require("./routes/debit_wallet");
 const create_wallet = require("./routes/create_wallet");
 const transfer_money = require("./routes/transfer_money.route");
 const Wallet = require("./db/models/wallet");
+const verifyToken = require("./middlewares/auth");
 
 app.use("/api/v1", txRecipient);
 app.use("/api/v1", fund_wallet);
@@ -36,9 +37,25 @@ app.post("/my/webhook/url", function (req, res) {
   res.send(200);
 });
 
-app.post('/webhook/url', (req, res) => {
+app.post("/webhook/url", (req, res) => {});
 
-})
+app.get("/me", verifyToken, (req, res) => {
+  res.send("welcome");
+  // var token = req.headers["x-access-token"];
+  // if (!token)
+  //   return res.status(401).send({ auth: false, message: "No token provided." });
+  // jwt.verify(token, process.env.TOKEN_KEY, function (err, decoded) {
+  //   if (err)
+  //     return res
+  //       .status(500)
+  //       .send({ auth: false, message: "Failed to authenticate token." });
+
+  //   res.status(200).send(decoded);
+  // });
+});
+
+app.get('/verify', verifyToken)
+
 app.listen(5000, () => {
   console.log(`running on 5000`);
 });
