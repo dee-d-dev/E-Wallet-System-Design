@@ -34,13 +34,14 @@ exports.fund_wallet = async (req, res) => {
     //transaction_status: ['success', 'failed', 'pending']
   });
 
-  const token = jwt.sign(
-    { data: user.name, iss: "adedotun" },
-    process.env.TOKEN_KEY,
-    {
-      expiresIn: "24h",
-    }
-  );
+  // const token = jwt.sign(
+  //   { data: "jwt", iss: "adedotun" },
+  //   process.env.TOKEN_KEY,
+  //   {
+  //     expiresIn: "24h",
+  //   }
+  // );
+
 
   return res.header("x-auth-token", token).send({
     success: true,

@@ -10,12 +10,11 @@ const login_user = async (req, res) => {
   }
 
   const schema = joi.object({
-    username: joi.string().required(),
     email: joi.string().email(),
     password: joi.string().required(),
   });
 
-  const validation = schema.validate({ username, email, password });
+  const validation = schema.validate({ email, password });
   if (validation.error) {
     return {
       success: false,
@@ -29,7 +28,7 @@ const login_user = async (req, res) => {
   let authenticate = await bcrypt.compare(password, user.password);
   if (!authenticate) res.send("incorrect email or password");
 
-  exports.token = jwt.sign(
+  let token = jwt.sign(
     { data: user.name, iss: "adedotun" },
     process.env.TOKEN_KEY,
     {
@@ -41,4 +40,4 @@ const login_user = async (req, res) => {
   res.header("bearer", token).send(token);
 };
 
-module.exports = { login_user};
+module.exports = { login_user };
