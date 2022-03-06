@@ -10,7 +10,7 @@ const jwt = require("jsonwebtoken");
 exports.fund_wallet = async (req, res) => {
   
   const user = await User.findOne({ email: req.decoded.email });
-  console.log(user);
+
   const wallet_id = user.wallet_id;
   const { amount, reason, recipient } = req.body;
 

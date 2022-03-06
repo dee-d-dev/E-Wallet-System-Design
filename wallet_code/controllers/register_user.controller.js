@@ -51,7 +51,6 @@ const reg_user = async (req, res) => {
   res.status(201).send({
     success: true,
     message: "created successfully",
-    token: token,
   });
 };
 

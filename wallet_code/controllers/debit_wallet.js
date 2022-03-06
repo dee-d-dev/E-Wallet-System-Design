@@ -6,9 +6,9 @@ const jwt = require("jsonwebtoken");
 const { token } = require("../controllers/login_user.controller");
 
 exports.debit_wallet = async (req, res) => {
-  
-  const { wallet_id, amount, reason, recipient } = req.body;
-
+  const user = await User.findOne({ email: req.decoded.email });
+  const { amount, reason, recipient } = req.body;
+  let wallet_id = user.wallet_id;
   const walletAmount = await Wallet.findById(wallet_id);
 
   if (walletAmount.balance < amount) {
