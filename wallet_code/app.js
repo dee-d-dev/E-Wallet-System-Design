@@ -21,14 +21,14 @@ const Wallet = require("./db/models/wallet");
 const verifyToken = require("./middlewares/auth");
 
 app.use("/api/v1", txRecipient);
-app.use("/api/v1", fund_wallet);
+app.use("/api/v1",verifyToken, fund_wallet);
 app.use("/api/v1", finalizeTransfer);
 
 app.use("/api/v1", register_user);
 app.use("/api/v1", login_user);
-app.use("/api/v1", debit_wallet);
-app.use("/api/v1", create_wallet);
-app.use("/api/v1", transfer_money);
+app.use("/api/v1",verifyToken, debit_wallet);
+app.use("/api/v1",verifyToken, create_wallet);
+app.use("/api/v1",verifyToken, transfer_money);
 
 app.post("/my/webhook/url", function (req, res) {
   // Retrieve the request's body
