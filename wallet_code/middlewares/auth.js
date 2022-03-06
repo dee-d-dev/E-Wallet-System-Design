@@ -9,7 +9,7 @@ const verifyToken = (req, res, next) => {
     req.token = bearer_token;
   }
   if (!bearer) {
-    return res.status(403).send("A token is required for authentication");
+    return res.status(403).send("Unauthorised");
   }
 
   const decoded = jwt.verify(req.token, process.env.TOKEN_KEY, (err) => {

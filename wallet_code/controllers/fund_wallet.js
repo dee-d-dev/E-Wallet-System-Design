@@ -9,17 +9,17 @@ const jwt = require("jsonwebtoken");
 
 exports.fund_wallet = async (req, res) => {
   const { wallet_id, amount, reason, recipient } = req.body;
-  const token = req.headers["x-access-token"];
-  if (!token) return res.send("no token provided");
+  // const token = req.headers["x-access-token"];
+  // if (!token) return res.send("no token provided");
 
-  jwt.verify(token, process.env.TOKEN_KEY, (err, decoded) => {
-    if (err)
-      return res
-        .status(500)
-        .send({ auth: false, message: "Failed to authenticate token." });
+  // jwt.verify(token, process.env.TOKEN_KEY, (err, decoded) => {
+  //   if (err)
+  //     return res
+  //       .status(500)
+  //       .send({ auth: false, message: "Failed to authenticate token." });
 
-    res.status(200).send(decoded);
-  });
+  //   res.status(200).send(decoded);
+  // });
 
   const wallet = await Wallet.findByIdAndUpdate(
     wallet_id,
@@ -45,15 +45,6 @@ exports.fund_wallet = async (req, res) => {
     //transaction_status: ['success', 'failed', 'pending']
   });
 
-  // const token = jwt.sign(
-  //   { data: "jwt", iss: "adedotun" },
-  //   process.env.TOKEN_KEY,
-  //   {
-  //     expiresIn: "24h",
-  //   }
-  // );
-
-  // header("x-auth-token", token).
   return res.send({
     success: true,
     amount: wallet.balance,
