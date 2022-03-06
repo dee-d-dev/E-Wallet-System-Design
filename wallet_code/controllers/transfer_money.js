@@ -4,18 +4,14 @@ const Transaction = require("../db/models/Transaction");
 
 //you can send money to another via email
 exports.transfer_money = async (req, res) => {
-  const {
-    receiver_email,
-    amount,
-    sender_wallet_id,
-    receiver_wallet_id,
-    reason,
-  } = req.body;
+  const { receiver_email, amount, reason } = req.body;
 
   const sender = await User.findOne({ email: req.decoded.email }).populate(
     "wallet_id"
   );
-  const receiver = await User.findOne({ email: receiver_email });
+  const receiver = await User.findOne({ email: receiver_email }).populate(
+    "wallet_id"
+  );
 
   if (sender && receiver) {
     const sender_wallet = await sender.wallet_id;
@@ -40,16 +36,20 @@ exports.transfer_money = async (req, res) => {
         { new: true }
       );
 
-      // await Transaction.create({
-      //   wallet_id: receiver.wallet_id,
-      //   transaction_type: "credit",
-      //   amount: amount,
-      //   description: reason,
-      //   balanceBefore: receiver_wallet.balance,
-      //   balanceAfter: receiver_wallet.balance + amount,
-      // reference: uuidv4,
-      //transaction_status: ['success', 'failed', 'pending']
-      // }),
+      await Transaction.create({
+        wallet_id: receiver.wallet_id,
+        transaction_type: "transfer",
+        amount: amount,
+        sender: req.decoded.email,
+        receiver: receiver_email,
+        description: reason,
+        sender_balanceBefore: sender_wallet.balance,
+        sender_balanceAfter: sender_wallet.balance - amount,
+        receiver_balanceBefore: receiver_wallet.balance,
+        receiver_balanceAfter: receiver_wallet.balance + amount,
+        transaction_status: "success",
+      });
+
       res.status(200).send({ success: true, amount: amount });
     } else {
       res.send({ success: false, message: "Insufficient balance" });

@@ -9,6 +9,8 @@ const transactionSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    sender: { type: String },
+    receiver: { type: String },
     transaction_id: {
       type: Number,
       trim: true,
@@ -16,20 +18,22 @@ const transactionSchema = new mongoose.Schema(
     transaction_type: {
       type: String,
       required: true,
-      enum: ["debit", "credit"],
+      enum: ["debit", "credit", "transfer"],
     },
-    balanceBefore: {
+    sender_balanceBefore: {
       type: Number,
     },
-    balanceAfter: {
+    sender_balanceAfter: {
       type: Number,
     },
-    // reference: {
-    //   type: String,
-    // },
+    receiver_balanceBefore: { type: Number },
+    receiver_balanceAfter: { type: Number },
     amount: {
       type: Number,
       required: [true, "amount is required"],
+    },
+    transaction_status: {
+      type: String,
     },
     createdAt: {
       type: Date,
