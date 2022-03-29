@@ -40,6 +40,7 @@ const login_user = async (req, res) => {
   user.token = token;
 
   exports.token;
+  res.statusCode(200)
   res.header("x-access-token", token).send({
     login: "success",
     token: token,
