@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "test": "jest --watchAll --detectOpenHandles",
+    "test": "chai",
     "start": "nodemon app"
   },
   "author": "adedotun",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "chai": "^4.3.6",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "fawn": "^2.1.5",
