@@ -10,9 +10,9 @@ chai.use(chaihttp);
 describe("CREATE /create", () => {
   it("register user", () => {
     const info = {
-      name: "godabeg2",
-      email: "worknow2@gmail.com",
-      password: "test",
+      name: "username",
+      email: "email@gmail.com",
+      password: "testpassword",
     };
     chai
       .request(server)
@@ -21,17 +21,16 @@ describe("CREATE /create", () => {
       .end((err, response) => {
         // response.to.have.status(201);
         response.should.have.status(201);
-        // response.body.should.be.a("object");
-        // response.body.should.have.property("login");
-        // response.body.should.have.property("token");
-        
+        response.body.should.be.a("object");
+        response.body.should.have.property("success");
+        response.body.should.have.property("message");
       });
   });
 
   it("login user", () => {
     const info = {
-      email: "user2@gmail.com",
-      password: "test",
+      email: "useremail@gmail.com",
+      password: "testpassword",
     };
     chai
       .request(server)
@@ -39,6 +38,26 @@ describe("CREATE /create", () => {
       .send(info)
       .end((err, response) => {
         response.should.have.status(200);
+        response.body.should.have.property("login");
+        response.body.should.have.property("token");
+      });
+  });
+
+  it("funds wallet", () => {
+    const info = {
+      source: "balance",
+      reason: "dance billings",
+      amount: 100,
+      recipient: "user",
+    };
+
+    chai
+      .request(server)
+      .post("/api/v1/credit_wallet")
+      .send(info)
+      .end((err, response) => {
+        response.body.should.be.an("object");
+        // response.body.should.have.property("amount");
       });
   });
 });
