@@ -5,6 +5,7 @@ const server = require("../app");
 should = chai.should();
 let expect = chai.expect;
 chai.use(chaihttp);
+let assert = require("chai").assert;
 
 //test CREATE WALLET
 describe("CREATE /create", () => {
@@ -51,13 +52,16 @@ describe("CREATE /create", () => {
       recipient: "user",
     };
 
+    success = true
     chai
       .request(server)
       .post("/api/v1/credit_wallet")
       .send(info)
       .end((err, response) => {
         response.body.should.be.an("object");
-        // response.body.should.have.property("amount");
+        // response.body.should.have.property("success");
       });
+
+      assert.typeOf(success, 'boolean')
   });
 });
