@@ -100,4 +100,22 @@ describe("CREATE /create", () => {
 
     assert.typeOf(success, "boolean");
   });
+  it("transfer money", () => {
+    const info = {
+      receiver_email: "test@gmail.com",
+      amount: 100,
+      reason: "test",
+    };
+
+    chai
+      .request(server)
+      .post("/api/v1/transfer")
+      .send(info)
+      .end((err, response) => {
+        response.body.should.be.an("object");
+        // response.body.should.have.property("success");
+      });
+
+    assert.typeOf(success, "boolean");
+  });
 });
