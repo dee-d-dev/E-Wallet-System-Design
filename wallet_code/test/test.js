@@ -83,4 +83,21 @@ describe("CREATE /create", () => {
 
     assert.typeOf(success, "boolean");
   });
+  it("create wallet", () => {
+    const info = {
+      user_id: 124,
+      balance: 100,
+    };
+
+    chai
+      .request(server)
+      .post("/api/v1/create_wallet")
+      .send(info)
+      .end((err, response) => {
+        response.body.should.be.an("object");
+        // response.body.should.have.property("success");
+      });
+
+    assert.typeOf(success, "boolean");
+  });
 });
