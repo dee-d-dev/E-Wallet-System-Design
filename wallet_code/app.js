@@ -1,14 +1,15 @@
 const express = require("express");
 const app = express();
-require("dotenv").config();
 const request = require("request");
+const config = require('./config.js')
 
 const db_connection = require("./db/connect");
-db_connection(process.env.MONGO_URI);
+
+db_connection(config.MONGO_URI);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const register_user = require("./routes/reg_user.route.js");
+const register_user = require("./routes/register_user.route.js");
 const login_user = require("./routes/login_user.route.js");
 const fund_wallet = require("./routes/fund_wallet.route.js");
 
@@ -17,6 +18,8 @@ const create_wallet = require("./routes/create_wallet");
 const transfer_money = require("./routes/transfer_money.route");
 const Wallet = require("./db/models/wallet");
 const verifyToken = require("./middlewares/auth");
+
+console.log(`NODE_ENV: ${config.NODE_ENV}`)
 
 app.use("/api/v1", fund_wallet);
 
@@ -35,8 +38,8 @@ app.post("/my/webhook/url", function (req, res) {
 
 app.post("/webhook/url", (req, res) => {});
 
-app.listen(5000, () => {
-  console.log(`running on 5000`);
+app.listen(config.PORT, config.HOST,() => {
+  console.log(`running on ${config.HOST}:${config.PORT}`);
 });
 
 module.exports = app;

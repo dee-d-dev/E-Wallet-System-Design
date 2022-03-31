@@ -9,10 +9,10 @@ chai.use(chaihttp);
 describe("TEST FOR WALLET", () => {
   //test CREATE WALLET
   describe("CREATE /create", () => {
-    it("login test", (done) => {
+    it("register user", (done) => {
       const info = {
-        name: "effff",
-        email: "effff@gmail.com",
+        name: "adde",
+        email: "adde@gmail.com",
         password: "test",
       };
       chai
