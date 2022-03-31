@@ -52,7 +52,7 @@ describe("CREATE /create", () => {
       recipient: "user",
     };
 
-    success = true
+    success = true;
     chai
       .request(server)
       .post("/api/v1/credit_wallet")
@@ -62,6 +62,25 @@ describe("CREATE /create", () => {
         // response.body.should.have.property("success");
       });
 
-      assert.typeOf(success, 'boolean')
+    assert.typeOf(success, "boolean");
+  });
+
+  it("debit wallet", () => {
+    const info = {
+      amount: 100,
+      reason: "staging",
+      password: "test",
+    };
+
+    chai
+      .request(server)
+      .post("/api/v1/debit")
+      .send(info)
+      .end((err, response) => {
+        response.body.should.be.an("object");
+        // response.body.should.have.property("success");
+      });
+
+    assert.typeOf(success, "boolean");
   });
 });
