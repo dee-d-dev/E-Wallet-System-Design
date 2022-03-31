@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "test": "mocha --timeout 10000",
+    "test": "set NODE_ENV=test&& mocha --clearCache --timeout 100000 --exit",
     "dev": "set NODE_ENV=development&& nodemon app.js",
     "prod": "set NODE_ENV=production&& node app.js"
   },

@@ -2,3 +2,4 @@
 node_modules
 development.env
 production.env
+test.env

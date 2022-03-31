@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const request = require("request");
-const config = require('./config.js')
+const config = require("./config.js");
 
 const db_connection = require("./db/connect");
 
@@ -19,7 +19,7 @@ const transfer_money = require("./routes/transfer_money.route");
 const Wallet = require("./db/models/wallet");
 const verifyToken = require("./middlewares/auth");
 
-console.log(`NODE_ENV: ${config.NODE_ENV}`)
+console.log(`NODE_ENV: ${config.NODE_ENV}`);
 
 app.use("/api/v1", fund_wallet);
 
@@ -38,7 +38,11 @@ app.post("/my/webhook/url", function (req, res) {
 
 app.post("/webhook/url", (req, res) => {});
 
-app.listen(config.PORT, config.HOST,() => {
+app.get("/welcome", (req, res) => {
+  res.send("welcome");
+});
+
+app.listen(config.PORT, config.HOST, () => {
   console.log(`running on ${config.HOST}:${config.PORT}`);
 });
 
