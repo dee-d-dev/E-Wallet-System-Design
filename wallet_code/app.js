@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const request = require("request");
-const config = require("./config.js");
+const config = require("./env/config.js");
 
 const db_connection = require("./db/connect");
 
