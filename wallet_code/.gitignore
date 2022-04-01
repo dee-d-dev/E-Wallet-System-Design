@@ -1,5 +1,5 @@
 
 node_modules
+test.env
 development.env
 production.env
-test.env
