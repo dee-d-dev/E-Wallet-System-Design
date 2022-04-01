@@ -1,5 +1,14 @@
 # E-Wallet-System-Design
 
+## RUN
+
+**START DEVELOPMENT SERVER**
+ npm run dev
+ 
+ **TEST ENDPOINTS**
+  npm run test
+ 
+
 ## Description
 This is a Wallet System API, that assigns a wallet to users when they 
 register an account.
@@ -50,3 +59,5 @@ https://joi.dev/api/
 
 **JWT**
 https://www.npmjs.com/package/jsonwebtoken
+
+
