@@ -4,9 +4,7 @@ const Wallet = require("../db/models/wallet");
 
 const create_wallet = async (req, res) => {
   const wallet = new Wallet(req.body);
-  //   const user = new User(req.body);
   const { user_id, balance } = req.body;
- 
 
   const user = User.findById(user_id);
 

@@ -83,6 +83,7 @@ describe("CREATE /create", () => {
 
     assert.typeOf(success, "boolean");
   });
+
   it("create wallet", () => {
     const info = {
       user_id: 124,
@@ -100,6 +101,7 @@ describe("CREATE /create", () => {
 
     assert.typeOf(success, "boolean");
   });
+  
   it("transfer money", () => {
     const info = {
       receiver_email: "test@gmail.com",
